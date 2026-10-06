@@ -35,7 +35,7 @@ fn timestamp_to_json(stamp: timestamp.Timestamp) {
 }
 
 fn issue_status_to_string(status: IssueStatus) {
-  let status_string = case status {
+  case status {
     Planned -> "Planned"
     Todo -> "Todo"
     InProgress -> "In Progress"

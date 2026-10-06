@@ -1,24 +1,30 @@
 # tundra
 
-[![Package Version](https://img.shields.io/hexpm/v/tundra)](https://hex.pm/packages/tundra)
-[![Hex Docs](https://img.shields.io/badge/hex-docs-ffaff3)](https://tundra.hexdocs.pm/)
-
-```sh
-gleam add tundra@1
-```
-```gleam
-import tundra
-
-pub fn main() -> Nil {
-  // TODO: An example of the project in use
-}
-```
-
-Further documentation can be found at <https://tundra.hexdocs.pm/>.
+Small product management software, written in Gleam.
 
 ## Development
 
+Install Gleam, Erlang/OTP, and Podman with a Compose provider (`podman-compose`).
+The local PostgreSQL service uses Podman's networking tools. On Rhino Linux
+(Ubuntu-based), install the missing tools if Podman reports `nft: No such file
+or directory` or `aardvark-dns binary not found`:
+
 ```sh
-gleam run   # Run the project
-gleam test  # Run the tests
+sudo apt install nftables aardvark-dns
 ```
+
+From the project root, start PostgreSQL and then the Gleam server:
+
+```sh
+podman compose up -d
+gleam run
+```
+
+The server listens on <http://localhost:8000>.
+
+Run tests with `gleam test`. To stop PostgreSQL, run `podman compose down`;
+this leaves the database volume intact.
+
+### Purpose
+
+To learn Gleam. 'Nuff said.
