@@ -1,5 +1,6 @@
 import gleam/dynamic/decode
 import gleam/http
+import gleam/http/response
 import gleam/json
 import gleam/option
 import gleam/result
@@ -30,11 +31,11 @@ type IssueItem {
 }
 
 // Utils
-fn timestamp_to_json(stamp: timestamp.Timestamp) {
+fn timestamp_to_json(stamp: timestamp.Timestamp) -> json.Json {
   json.string(timestamp.to_rfc3339(stamp, calendar.utc_offset))
 }
 
-fn issue_status_to_string(status: IssueStatus) {
+fn issue_status_to_string(status: IssueStatus) -> String {
   case status {
     Planned -> "Planned"
     Todo -> "Todo"
@@ -45,7 +46,7 @@ fn issue_status_to_string(status: IssueStatus) {
   }
 }
 
-fn issue_to_json(item: IssueItem) {
+fn issue_to_json(item: IssueItem) -> json.Json {
   json.object([
     #("id", json.string(uuid.to_string(item.id))),
     #("title", json.string(item.title)),
@@ -57,19 +58,19 @@ fn issue_to_json(item: IssueItem) {
 }
 
 // Impl
-fn delete_issue(_id) {
+fn delete_issue(_id: String) -> response.Response(wisp.Body) {
   wisp.no_content()
 }
 
-fn get_issue(id) {
+fn get_issue(id: String) -> response.Response(wisp.Body) {
   wisp.string_body(wisp.ok(), "Returned issue: " <> id)
 }
 
-fn get_issues() {
+fn get_issues() -> response.Response(wisp.Body) {
   wisp.string_body(wisp.ok(), "Issues:")
 }
 
-fn post_issues(req: Request) {
+fn post_issues(req: Request) -> response.Response(wisp.Body) {
   use json <- wisp.require_json(req)
   let result = {
     let decoder = {
