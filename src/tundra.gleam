@@ -1,8 +1,8 @@
 import envoy
 import gleam/erlang/process
 import gleam/result
-import lib/router
 import mist
+import tundra/router
 import wisp
 import wisp/wisp_mist
 
