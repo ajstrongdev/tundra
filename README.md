@@ -1,10 +1,17 @@
-# tundra
+# Tundra
 
 Small product management software, written in Gleam.
 
 ## Development
 
-Install Gleam, Erlang/OTP, and Podman with a Compose provider (`podman-compose`).
+Install Gleam and Erlang/OTP via Pacstall on Rhino Linux:
+
+```sh
+pacstall -I gleam-bin
+```
+
+When Pacstall prompts to install Erlang as an optional dependency, say yes.
+Also install Podman with a Compose provider (`podman-compose`).
 The local PostgreSQL service uses Podman's networking tools. On Rhino Linux
 (Ubuntu-based), install the missing tools if Podman reports `nft: No such file
 or directory` or `aardvark-dns binary not found`:
