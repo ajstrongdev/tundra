@@ -1,8 +1,13 @@
-CREATE TABLE issue_items (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    title TEXT NOT NULL,
-    description TEXT,
-    status TEXT NOT NULL DEFAULT 'Planned',
-    created_at TIMESTAMP NOT NULL DEFAULT now(),
-    updated_at TIMESTAMP NOT NULL DEFAULT now()
-);
+CREATE TABLE users (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    username TEXT NOT NULL,
+    email TEXT,
+    password_hash TEXT NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL
+)
+
+CREATE TABLE sessions (
+    id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    token TEXT NOT NULL,
+    expires TIMESTAMPTZ NOT NULL
+)
